@@ -29,7 +29,6 @@
       </a>
 
       <a class="brand" href="#">INSPIRITAS</a>
-      <span class="tagline">a free Bootstrap theme by Ripple. <a href="http://littke.com/2012/11/06/inspiritas-bootstrap-theme-by-ripple.html">Read more.</a></span>
 
       <div class="nav-collapse collapse" id="main-menu">
         <div class="auth pull-right">
@@ -59,6 +58,9 @@
                 ================================================== -->
                 <section id="stats">
                   <header>
+                    <div class="pull-right">
+                        <a href="tambah_kelas.php" class="btn btn-small">Add</a>
+                    </div>
                     <h1>Dashboard</h1>
                   </header>
                   
