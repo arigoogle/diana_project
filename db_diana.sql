@@ -2,9 +2,9 @@
 -- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: 30 Mei 2015 pada 20.46
--- Versi Server: 5.6.21
+-- Host: 127.0.0.1
+-- Generation Time: May 31, 2015 at 12:11 AM
+-- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,18 +23,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_dosen`
+-- Table structure for table `tb_dosen`
 --
 
 CREATE TABLE IF NOT EXISTS `tb_dosen` (
 `id_dosen` int(11) NOT NULL,
   `nama_dosen` varchar(80) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_dosen`
+--
+
+INSERT INTO `tb_dosen` (`id_dosen`, `nama_dosen`) VALUES
+(5, 'Ariyanto'),
+(2, 'Ari'),
+(4, 'Vive Pio');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_kelas`
+-- Table structure for table `tb_kelas`
 --
 
 CREATE TABLE IF NOT EXISTS `tb_kelas` (
@@ -45,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `tb_kelas` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_matakuliah`
+-- Table structure for table `tb_matakuliah`
 --
 
 CREATE TABLE IF NOT EXISTS `tb_matakuliah` (
@@ -57,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `tb_matakuliah` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_user`
+-- Table structure for table `tb_user`
 --
 
 CREATE TABLE IF NOT EXISTS `tb_user` (
@@ -102,7 +111,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_dosen`
 --
 ALTER TABLE `tb_dosen`
-MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tb_kelas`
 --
