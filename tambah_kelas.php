@@ -48,7 +48,7 @@
             <span class="name">Diana</span><br/>
             <span class="links">
                 <a href="#">Settings</a>
-                <a href="#">Logout</a>
+                <a href="login.php">Logout</a>
             </span>
         </div>
       </div>
