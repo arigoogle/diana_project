@@ -15,5 +15,8 @@
       <li>
         <a href="jadwal.php"><i class="icon-retweet icon-white"></i> Jadwal</a>
       </li>
+      <li>
+        <a href="user.php"><i class="icon-user icon-white"></i> User</a>
+      </li>
     </ul>
 </nav>
