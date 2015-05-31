@@ -1,3 +1,15 @@
+<?php  
+  require_once 'libs/konek.php';
+  
+    if (isset($_POST['tekan'])) 
+    {
+      $nama_mk      = $_POST['nama_mk'];
+      $sks          = $_POST['sks'];
+      $siapin_query = "INSERT INTO tb_matakuliah (nama_mk,sks) VALUES ('$nama_mk','$sks')";
+      $do_query     = mysql_query($siapin_query);
+      header("location:matkul.php");
+    }
+?>
 <!DOCTYPE htmlu>
 <html lang="en">
 <head>
@@ -59,9 +71,6 @@
                 ================================================== -->
                 <section id="stats">
                   <header>
-                    <div class="pull-right">
-                        <a href="tambah_dosen.php" class="btn btn-small">Add</a>
-                    </div>
                     <h1>Dashboard</h1>
                   </header>
                   
@@ -77,39 +86,31 @@
 
                   <div class="row-fluid">
                     <div class="span12">
-                      <form class="form-horizontal">
+                      <form class="form-horizontal" method="POST">
                           <div class="control-group">
-                            <label class="control-label" for="input01">Mata Kuliah</label>
-                            <div class="controls">
-                              <input type="text" class="input-large" id="input01">
-                            </div>
+                              <label class="control-label" for="input01">Mata Kuliah</label>
+                              <div class="controls">
+                                <input type="text" class="input-large" id="input01" name="nama_mk">
+                              </div>
                           </div>
-                      <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <button type="reset" class="btn">Cancel</button>
-                      </div>
-                  </form>
+                          <div class="control-group">
+                              <label class="control-label" for="input01">SKS</label>
+                              <div class="controls">
+                                <input type="text" class="input-large" id="input01" name="sks">
+                              </div>
+                          </div>
+                          <div class="form-actions">
+                              <button type="submit" class="btn btn-primary" name="tekan">Save changes</button>
+                              <button type="reset" class="btn">Cancel</button>
+                          </div>
+                      </form>
                 </section>
-                <!-- END form -->
-
-
-
-                
-
-
-              
-
-              
-
+                <!-- END form -->            
             </section>
-
             </div>
         </div>
     </div>
 </div><!-- /container -->
-
-
-
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

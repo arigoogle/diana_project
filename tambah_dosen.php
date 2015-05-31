@@ -6,6 +6,7 @@
       $nama_dosen   = $_POST['nama_dosen'];
       $siapin_query = "INSERT INTO tb_dosen (nama_dosen) VALUES ('$nama_dosen')";
       $do_query     = mysql_query($siapin_query);
+      header("location:dosen.php");
     }
 ?>
 
