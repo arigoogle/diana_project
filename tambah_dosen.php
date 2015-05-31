@@ -71,7 +71,7 @@
                 ================================================== -->
                 <section id="stats">
                   <header>
-                    <h1>Dashboard</h1>
+                    <h1>Tambah Dosen</h1>
                   </header>
                   
                 </section>

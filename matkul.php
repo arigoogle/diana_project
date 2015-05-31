@@ -67,7 +67,7 @@
                     <div class="pull-right">
                         <a href="tambah_matkul.php" class="btn btn-small">Add</a>
                     </div>
-                    <h1>Dashboard</h1>
+                    <h1>Mata Kuliah</h1>
                   </header>
                   
                 </section>

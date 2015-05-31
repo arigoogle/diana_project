@@ -93,7 +93,7 @@
                 ================================================== -->
                 <section id="stats">
                   <header>
-                    <h1>Dashboard</h1>
+                    <h1>Edit Dosen</h1>
                   </header>
                   
                 </section>

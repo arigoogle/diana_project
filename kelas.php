@@ -69,7 +69,7 @@
                     <div class="pull-right">
                         <a href="tambah_kelas.php" class="btn btn-small">Add</a>
                     </div>
-                    <h1>Dashboard</h1>
+                    <h1>Kelas</h1>
                   </header>
                   
                 </section>

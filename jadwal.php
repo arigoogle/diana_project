@@ -61,7 +61,7 @@
                     <div class="pull-right">
                         <a href="tambah_jadwal.php" class="btn btn-small">Add</a>
                     </div>
-                    <h1>Dashboard</h1>
+                    <h1>Jadwal</h1>
                   </header>
                   
                 </section>
