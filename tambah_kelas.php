@@ -1,8 +1,19 @@
+<?php  
+  require_once 'libs/konek.php';
+  
+    if (isset($_POST['tekan'])) 
+    {
+      $kelas   = $_POST['kelas'];
+      $siapin_query = "INSERT INTO tb_kelas (kelas) VALUES ('$kelas')";
+      $do_query     = mysql_query($siapin_query);
+      header("location:kelas.php");
+    }
+?>
 <!DOCTYPE htmlu>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Inspiritas - a free Bootstrap theme by Ripple</title>
+    <title>Diana Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -34,7 +45,7 @@
       <div class="nav-collapse collapse" id="main-menu">
         <div class="auth pull-right">
             <img class="avatar" src="images/littke.png">
-            <span class="name">Jonatan Littke</span><br/>
+            <span class="name">Diana</span><br/>
             <span class="links">
                 <a href="#">Settings</a>
                 <a href="#">Logout</a>
@@ -66,8 +77,6 @@
                   </header>
                   
                 </section>
-                
-                
                 <!-- Forms
                 ================================================== -->
                 <section id="forms">
@@ -77,39 +86,25 @@
 
                   <div class="row-fluid">
                     <div class="span12">
-                      <form class="form-horizontal">
+                      <form class="form-horizontal" method="POST">
                           <div class="control-group">
-                            <label class="control-label" for="input01">Tambah Kelas</label>
-                            <div class="controls">
-                              <input type="text" class="input-large" id="input01">
-                            </div>
+                              <label class="control-label" for="input01">Tambah Kelas</label>
+                              <div class="controls">
+                                <input type="text" class="input-large" id="input01" name="kelas">
+                              </div>
                           </div>
-                      <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <button type="reset" class="btn">Cancel</button>
-                      </div>
-                  </form>
-                </section>
+                          <div class="form-actions">
+                              <button type="submit" class="btn btn-primary" name="tekan">Save changes</button>
+                              <button type="reset" class="btn">Cancel</button>
+                          </div>
+                      </form>
+                    </section>
                 <!-- END form -->
-
-
-
-                
-
-
-              
-
-              
-
-            </section>
-
+                  </section>
             </div>
         </div>
     </div>
 </div><!-- /container -->
-
-
-
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

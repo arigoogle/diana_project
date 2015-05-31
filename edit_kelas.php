@@ -1,9 +1,37 @@
 <?php  
   require_once 'libs/konek.php';
-  // mengambil data tabel mata kuliah
-  $query    = "SELECT * FROM tb_matakuliah";
-  $do_query = mysql_query($query);
+  
+  $id_kelas     = null;
+  $kelas        = null;
+  if (isset($_GET['id_kelas'])) 
+  {
+    $id_kelas = $_GET['id_kelas'];
+
+    //persiapan ambil data
+    $data = "SELECT * FROM tb_kelas WHERE id_kelas=$id_kelas";
+    //ambil data yg sudah di persiapkan
+    $ambil_data = mysql_query($data);
+    while ( $a  = mysql_fetch_array($ambil_data))
+
+    {
+      
+      $id_kelas     = $a['id_kelas'];
+      $kelas        = $a['kelas'];
+
+    }
+  }
+  if (isset($_POST['tekan'])) 
+    {
+      $kelas   = $_POST['kelas'];
+      $siapin_query = "UPDATE tb_kelas SET kelas='$kelas' WHERE id_kelas=$id_kelas";
+      $do_query     = mysql_query($siapin_query);
+
+      header("location:kelas.php");
+    }
+
+
 ?>
+
 <!DOCTYPE htmlu>
 <html lang="en">
 <head>
@@ -35,6 +63,7 @@
       </a>
 
       <a class="brand" href="#">INSPIRITAS</a>
+      
 
       <div class="nav-collapse collapse" id="main-menu">
         <div class="auth pull-right">
@@ -64,9 +93,6 @@
                 ================================================== -->
                 <section id="stats">
                   <header>
-                    <div class="pull-right">
-                        <a href="tambah_matkul.php" class="btn btn-small">Add</a>
-                    </div>
                     <h1>Dashboard</h1>
                   </header>
                   
@@ -74,48 +100,36 @@
                 
                 <!-- Tables
                 ================================================== -->
-                <section id="tables">
-                  <table class="table table-striped full-section table-hover">
-                    <thead>
-                      <tr>
-                        <th>Mata Kuliah</th>
-                        <th>SKS</th>
-                        <th>#</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php while ($a= mysql_fetch_array($do_query)) :  ?>
-                        <tr>
-                          <td class="primary"><?php echo $a['nama_mk']; ?></td>
-                          <td class="primary"><?php echo $a['sks']; ?></td>
-                          <td>
-                              <a class="btn btn-small" href="edit_matkul.php?id_mk=<?php echo $a['id_mk'] ?>">Edit</a>
-                              <a class="btn btn-small btn-danger" href="delete_matkul.php?id_mk=<?php echo $a['id_mk'] ?>">Delete</a>
-                          </td>
-                        </tr>
-                      <?php endwhile; ?>                      
-                    </tbody>
-                  </table>
-                </section>
-
-
-
                 
+                <!-- Forms
+                ================================================== -->
+                <section id="forms">
+                  <div class="sub-header">
+                    <h2>Forms</h2>
+                  </div>
 
-
-              
-
-              
-
+                  <div class="row-fluid">
+                    <div class="span12">
+                      <form class="form-horizontal" method="POST">
+                          <div class="control-group">
+                            <input type="hidden" name="id_kelas" value="<?php echo $id_kelas ?>"> <br>
+                            <label class="control-label" for="input01">Kelas</label>
+                            <div class="controls">
+                              <input type="text" class="input-large" id="input01" name="kelas" value="<?php echo $kelas ?>"> 
+                            </div>
+                          </div>
+                      <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" name="tekan">Save changes</button>
+                        <button type="reset" class="btn">Cancel</button>
+                      </div>
+                  </form>
+                </section>
+                <!-- END form -->
             </section>
-
             </div>
         </div>
     </div>
 </div><!-- /container -->
-
-
-
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

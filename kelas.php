@@ -1,8 +1,16 @@
+<?php  
+  require_once 'libs/konek.php';
+  // mengambil tulisan3
+  $query    = "SELECT * FROM tb_kelas";
+  $do_query = mysql_query($query);
+
+
+?>
 <!DOCTYPE htmlu>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Inspiritas - a free Bootstrap theme by Ripple</title>
+    <title>Diana Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -33,7 +41,7 @@
       <div class="nav-collapse collapse" id="main-menu">
         <div class="auth pull-right">
             <img class="avatar" src="images/littke.png">
-            <span class="name">Jonatan Littke</span><br/>
+            <span class="name">Diana</span><br/>
             <span class="links">
                 <a href="#">Settings</a>
                 <a href="#">Logout</a>
@@ -72,108 +80,29 @@
                   <table class="table table-striped full-section table-hover">
                     <thead>
                       <tr>
-                        <th>Mata Kuliah</th>
-                        <th>Kelas a</th>
-                        <th>SKS</th>
+                        <th>Kelas</th>
                         <th>#</th>
-                        <th>EUR</th>
-                        <th>Highest day</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td class="primary">HTML5</td>
-                        <td>87%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 35%"></div>
-                            </div>
-                        </td>
-                        <td>32,854</td>
-                        <td>40,633</td>
-                        <td>December 15, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">CSS3</td>
-                        <td>57%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 62%"></div>
-                            </div>
-                        </td>
-                        <td>10,537</td>
-                        <td>30,352</td>
-                        <td>December 7, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">JavaScript 8.8</td>
-                        <td>87%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 40%"></div>
-                            </div>
-                        </td>
-                        <td>39,104</td>
-                        <td>33,241</td>
-                        <td>December 21, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">HTML5</td>
-                        <td>87%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 85%"></div>
-                            </div>
-                        </td>
-                        <td>32,854</td>
-                        <td>40,633</td>
-                        <td>December 15, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">CSS3</td>
-                        <td>57%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 89%"></div>
-                            </div>
-                        </td>
-                        <td>10,537</td>
-                        <td>30,352</td>
-                        <td>December 7, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">JavaScript 8.8</td>
-                        <td>87%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 15%"></div>
-                            </div>
-                        </td>
-                        <td>39,104</td>
-                        <td>33,241</td>
-                        <td>December 21, 2012</td>
-                      </tr>
+                      <?php while ($a= mysql_fetch_array($do_query)) :  ?>
+                        <tr>
+                          <td class="primary"><?php echo $a['kelas']; ?></td>
+                          <td>
+                            <a class="btn btn-small" href="edit_kelas.php?id_kelas=<?php echo $a['id_kelas'] ?>">Edit</a>
+                            <a class="btn btn-small btn-danger" href="delete_kelas.php?id_kelas=<?php echo $a['id_kelas'] ?>">Delete</a>
+                          </td>
+                        </tr>
+                      <?php endwhile; ?>
+                      
                     </tbody>
                   </table>
                 </section>
-
-
-
-                
-
-
-              
-
-              
-
             </section>
-
             </div>
         </div>
     </div>
 </div><!-- /container -->
-
-
 
     <!-- Le javascript
     ================================================== -->
