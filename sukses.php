@@ -1,13 +1,6 @@
 <?php  
   require_once 'libs/konek.php';
-  
-    if (isset($_POST['tekan'])) 
-    {
-      $nama_dosen   = $_POST['nama_dosen'];
-      $siapin_query = "INSERT INTO tb_dosen (nama_dosen) VALUES ('$nama_dosen')";
-      $do_query     = mysql_query($siapin_query);
-      header("location:sukses.php");
-    }
+  header('Refresh: 3; URL=dosen.php');
 ?>
 
 <!DOCTYPE htmlu>
@@ -78,48 +71,35 @@
                 
                 <!-- Tables
                 ================================================== -->
-                
-                <!-- Forms
-                ================================================== -->
-                <section id="forms">
-                  <div class="sub-header">
-                    <h2>Forms</h2>
-                  </div>
+                <!-- Miscellaneous
+              ================================================== -->
+                <section id="miscellaneous">
+                    <div class="sub-header">
+                      <h2>Alerts</h2>
+                    </div>
 
-                  <div class="row-fluid">
-                    <div class="span12">
-                      <form class="form-horizontal" method="POST">
-                          <div class="control-group">
-                            <label class="control-label" for="input01">Nama Dosen</label>
-                            <div class="controls">
-                              <input type="text" class="input-large" id="input01" name="nama_dosen">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="alert alert-success">
+                              <a class="close">&times;</a>
+                              <strong>Sukses</strong> Data berhasil disimpan.
+                            <div>
+                        </div>
+                    </div>
+                    <!-- <div class="row-fluid">
+                        <div class="span12">
+                            <div class="alert alert-error">
+                              <a class="close">&times;</a>
+                              <strong>Error</strong> Change a few things up and try submitting again.
                             </div>
-                          </div>
-                      <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" name="tekan">Save changes</button>
-                        <button type="reset" class="btn">Cancel</button>
-                      </div>
-                  </form>
+                        </div>
+                    </div> -->
                 </section>
-                <!-- END form -->
-
-
-
-                
-
-
-              
-
-              
-
-            </section>
-
+              <!-- end miscellneous -->
             </div>
         </div>
     </div>
 </div><!-- /container -->
-
-
 
     <!-- Le javascript
     ================================================== -->
