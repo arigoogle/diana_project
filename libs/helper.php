@@ -18,7 +18,7 @@ function hasChange() {
 function doChangesData( $value='1' )
 {
 
-	$query = mysql_query("UPDATE tb_option WHERE option_key='changes_data' SET option_value='$value'");
+	$query = mysql_query("UPDATE tb_option SET option_value='$value' WHERE option_key='changes_data'");
 	return $query;
 }
 
