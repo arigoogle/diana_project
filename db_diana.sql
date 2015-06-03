@@ -2,9 +2,9 @@
 -- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: May 31, 2015 at 12:11 AM
--- Server version: 5.6.21
+-- Host: localhost
+-- Generation Time: 03 Jun 2015 pada 03.37
+-- Versi Server: 5.6.21
 -- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,57 +23,133 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_dosen`
+-- Struktur dari tabel `tb_dosen`
 --
 
 CREATE TABLE IF NOT EXISTS `tb_dosen` (
 `id_dosen` int(11) NOT NULL,
   `nama_dosen` varchar(80) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_dosen`
+-- Truncate table before insert `tb_dosen`
+--
+
+TRUNCATE TABLE `tb_dosen`;
+--
+-- Dumping data untuk tabel `tb_dosen`
 --
 
 INSERT INTO `tb_dosen` (`id_dosen`, `nama_dosen`) VALUES
-(5, 'Ariyanto'),
-(2, 'Ari'),
-(4, 'Vive Pio');
+(1, 'Sumardi Karta Dinata As'),
+(2, 'Leornado lamborgini'),
+(3, 'Bagus Sadirja'),
+(4, 'Sumarni Sembalo');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_kelas`
+-- Struktur dari tabel `tb_kelas`
 --
 
 CREATE TABLE IF NOT EXISTS `tb_kelas` (
 `id_kelas` int(11) NOT NULL,
   `kelas` varchar(30) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Truncate table before insert `tb_kelas`
+--
+
+TRUNCATE TABLE `tb_kelas`;
+--
+-- Dumping data untuk tabel `tb_kelas`
+--
+
+INSERT INTO `tb_kelas` (`id_kelas`, `kelas`) VALUES
+(1, 'D 305'),
+(2, 'E 301'),
+(3, 'D 205'),
+(4, 'A 202');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_matakuliah`
+-- Struktur dari tabel `tb_matakuliah`
 --
 
 CREATE TABLE IF NOT EXISTS `tb_matakuliah` (
 `id_mk` int(11) NOT NULL,
-  `nama_mk` varchar(30) NOT NULL,
+  `nama_mk` varchar(50) NOT NULL,
   `sks` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Truncate table before insert `tb_matakuliah`
+--
+
+TRUNCATE TABLE `tb_matakuliah`;
+--
+-- Dumping data untuk tabel `tb_matakuliah`
+--
+
+INSERT INTO `tb_matakuliah` (`id_mk`, `nama_mk`, `sks`) VALUES
+(1, 'Web Enterprise', 2),
+(2, 'Kewarganegaraan', 2),
+(3, 'Algortima dan Struktur Data', 3),
+(4, 'Interaksi Manusia dan Komputer', 3),
+(5, 'Enterprise dan Resource Planni', 3),
+(6, 'Etika Bernegara', 2),
+(7, 'Perancangan Basis Data', 3),
+(8, 'Sistem Operasi', 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_option`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_option` (
+`id_option` int(11) NOT NULL,
+  `option_key` varchar(140) NOT NULL,
+  `option_value` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Truncate table before insert `tb_option`
+--
+
+TRUNCATE TABLE `tb_option`;
+--
+-- Dumping data untuk tabel `tb_option`
+--
+
+INSERT INTO `tb_option` (`id_option`, `option_key`, `option_value`) VALUES
+(1, 'changes_data', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_user`
 --
 
 CREATE TABLE IF NOT EXISTS `tb_user` (
 `id_user` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(32) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Truncate table before insert `tb_user`
+--
+
+TRUNCATE TABLE `tb_user`;
+--
+-- Dumping data untuk tabel `tb_user`
+--
+
+INSERT INTO `tb_user` (`id_user`, `username`, `password`) VALUES
+(1, 'root', 'smanuthamrin');
 
 --
 -- Indexes for dumped tables
@@ -98,6 +174,12 @@ ALTER TABLE `tb_matakuliah`
  ADD PRIMARY KEY (`id_mk`);
 
 --
+-- Indexes for table `tb_option`
+--
+ALTER TABLE `tb_option`
+ ADD PRIMARY KEY (`id_option`), ADD UNIQUE KEY `option_key` (`option_key`);
+
+--
 -- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
@@ -111,22 +193,27 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `tb_dosen`
 --
 ALTER TABLE `tb_dosen`
-MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
-MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_matakuliah`
 --
 ALTER TABLE `tb_matakuliah`
-MODIFY `id_mk` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_mk` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `tb_option`
+--
+ALTER TABLE `tb_option`
+MODIFY `id_option` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
