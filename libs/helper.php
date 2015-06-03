@@ -32,6 +32,7 @@ function dataKelas()
 		$return[] = $r['id_kelas'];
 	}
 
+	$return = array_rand( $return );
 	return $return;
 }
 
@@ -45,6 +46,7 @@ function dataDosen()
 		$return[] = $r['id_dosen'];
 	}
 
+	$return = array_rand( $return );
 	return $return;
 }
 
