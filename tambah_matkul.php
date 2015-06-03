@@ -7,6 +7,10 @@
       $sks          = $_POST['sks'];
       $siapin_query = "INSERT INTO tb_matakuliah (nama_mk,sks) VALUES ('$nama_mk','$sks')";
       $do_query     = mysql_query($siapin_query);
+
+      //eksekusi perubahan data( function ada di helper.php)
+      doChangesData();
+      
       header("location:matkul.php");
     }
 ?>

@@ -6,6 +6,10 @@
       $kelas   = $_POST['kelas'];
       $siapin_query = "INSERT INTO tb_kelas (kelas) VALUES ('$kelas')";
       $do_query     = mysql_query($siapin_query);
+
+      //eksekusi perubahan data( function ada di helper.php)
+      doChangesData();
+      
       header("location:kelas.php");
     }
 ?>
