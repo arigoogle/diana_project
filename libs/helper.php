@@ -36,7 +36,7 @@ function dataKelas()
 	return $return;
 }
 
-function dataDosen()
+function dataDosen( $index = null )
 {
 	
 	$query = mysql_query( "SELECT * FROM tb_dosen");
@@ -46,8 +46,14 @@ function dataDosen()
 		$return[] = $r['id_dosen'];
 	}
 
-	$return = array_rand( $return );
-	return $return;
+	return $return[ $index ];
+}
+
+function kodeHari( $kode )
+{
+    
+    $arrayDay = array("Senin", "Selasa", "Rabu", "Kamis", "Jumat");
+	return $arrayDay[ $kode ];
 }
 
 ?>
