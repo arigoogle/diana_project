@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 03 Jun 2015 pada 03.37
+-- Generation Time: 03 Jun 2015 pada 14.04
 -- Versi Server: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -45,6 +45,40 @@ INSERT INTO `tb_dosen` (`id_dosen`, `nama_dosen`) VALUES
 (2, 'Leornado lamborgini'),
 (3, 'Bagus Sadirja'),
 (4, 'Sumarni Sembalo');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_jadwal`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_jadwal` (
+`id_jadwal` int(11) NOT NULL,
+  `id_mk` int(11) NOT NULL,
+  `id_dosen` int(11) NOT NULL,
+  `id_kelas` int(11) NOT NULL,
+  `pukul` varchar(30) NOT NULL,
+  `hari` varchar(15) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Truncate table before insert `tb_jadwal`
+--
+
+TRUNCATE TABLE `tb_jadwal`;
+--
+-- Dumping data untuk tabel `tb_jadwal`
+--
+
+INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mk`, `id_dosen`, `id_kelas`, `pukul`, `hari`) VALUES
+(1, 1, 1, 1, '11.00 - 12.40', '3'),
+(2, 2, 2, 0, '10.00 - 11.40', '1'),
+(3, 3, 3, 1, '08.00 - 10.30', '2'),
+(4, 4, 4, 2, '11.00 - 01.30', '3'),
+(5, 5, 1, 0, '10.00 - 12.30', '0'),
+(6, 6, 2, 0, '08.00 - 09.40', '0'),
+(7, 7, 3, 2, '08.00 - 10.30', '0'),
+(8, 8, 4, 3, '10.00 - 12.30', '1');
 
 -- --------------------------------------------------------
 
@@ -125,7 +159,7 @@ TRUNCATE TABLE `tb_option`;
 --
 
 INSERT INTO `tb_option` (`id_option`, `option_key`, `option_value`) VALUES
-(1, 'changes_data', '1');
+(1, 'changes_data', '0');
 
 -- --------------------------------------------------------
 
@@ -162,6 +196,12 @@ ALTER TABLE `tb_dosen`
  ADD PRIMARY KEY (`id_dosen`);
 
 --
+-- Indexes for table `tb_jadwal`
+--
+ALTER TABLE `tb_jadwal`
+ ADD PRIMARY KEY (`id_jadwal`);
+
+--
 -- Indexes for table `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
@@ -194,6 +234,11 @@ ALTER TABLE `tb_user`
 --
 ALTER TABLE `tb_dosen`
 MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `tb_jadwal`
+--
+ALTER TABLE `tb_jadwal`
+MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tb_kelas`
 --
