@@ -1,4 +1,15 @@
-<!DOCTYPE htmlu>
+<?php 
+require_once 'libs/konek.php';
+require_once 'libs/helper.php';
+
+$msg = null;
+if( hasChange() === '1' ) {
+
+  $msg = "<div class='alert alert-warning'>Ada data baru telah masuk. Tekan \"Generate Jadwal\" untuk acak ulang jadwal.</div>"; 
+}
+
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -59,7 +70,7 @@
                 <section id="stats">
                   <header>
                     <div class="pull-right">
-                        <a href="tambah_jadwal.php" class="btn btn-small">Add</a>
+                        <a href="tambah_jadwal.php" class="btn btn-primary btn-small">Generate Jadwal</a>
                     </div>
                     <h1>Jadwal</h1>
                   </header>
@@ -69,103 +80,22 @@
                 <!-- Tables
                 ================================================== -->
                 <section id="tables">
+                  <?php echo $msg; ?>
                   <table class="table table-striped full-section table-hover">
                     <thead>
                       <tr>
+                        <th>Hari</th>
+                        <th>Pukul</th>
                         <th>Mata Kuliah</th>
-                        <th>Kelas a</th>
                         <th>SKS</th>
-                        <th>#</th>
-                        <th>EUR</th>
-                        <th>Highest day</th>
+                        <th>Dosen</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td class="primary">HTML5</td>
-                        <td>87%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 35%"></div>
-                            </div>
-                        </td>
-                        <td>32,854</td>
-                        <td>40,633</td>
-                        <td>December 15, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">CSS3</td>
-                        <td>57%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 62%"></div>
-                            </div>
-                        </td>
-                        <td>10,537</td>
-                        <td>30,352</td>
-                        <td>December 7, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">JavaScript 8.8</td>
-                        <td>87%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 40%"></div>
-                            </div>
-                        </td>
-                        <td>39,104</td>
-                        <td>33,241</td>
-                        <td>December 21, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">HTML5</td>
-                        <td>87%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 85%"></div>
-                            </div>
-                        </td>
-                        <td>32,854</td>
-                        <td>40,633</td>
-                        <td>December 15, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">CSS3</td>
-                        <td>57%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 89%"></div>
-                            </div>
-                        </td>
-                        <td>10,537</td>
-                        <td>30,352</td>
-                        <td>December 7, 2012</td>
-                      </tr>
-                      <tr>
-                        <td class="primary">JavaScript 8.8</td>
-                        <td>87%</td>
-                        <td>
-                            <div class="progress progress-mini">
-                              <div class="bar" style="width: 15%"></div>
-                            </div>
-                        </td>
-                        <td>39,104</td>
-                        <td>33,241</td>
-                        <td>December 21, 2012</td>
-                      </tr>
+                      
                     </tbody>
                   </table>
                 </section>
-
-
-
-                
-
-
-              
-
-              
-
             </section>
 
             </div>
