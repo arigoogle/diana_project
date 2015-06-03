@@ -22,4 +22,30 @@ function doChangesData( $value='1' )
 	return $query;
 }
 
+function dataKelas()
+{
+	
+	$query = mysql_query( "SELECT * FROM tb_kelas");
+	$return = array();
+	while( $r=mysql_fetch_array( $query ) ) {
+
+		$return[] = $r['id_kelas'];
+	}
+
+	return $return;
+}
+
+function dataDosen()
+{
+	
+	$query = mysql_query( "SELECT * FROM tb_dosen");
+	$return = array();
+	while( $r=mysql_fetch_array( $query ) ) {
+
+		$return[] = $r['id_dosen'];
+	}
+
+	return $return;
+}
+
 ?>
