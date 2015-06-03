@@ -1,11 +1,16 @@
 <?php  
   require_once 'libs/konek.php';
+  require_once 'libs/helper.php';
   
     if (isset($_POST['tekan'])) 
     {
       $nama_dosen   = $_POST['nama_dosen'];
       $siapin_query = "INSERT INTO tb_dosen (nama_dosen) VALUES ('$nama_dosen')";
       $do_query     = mysql_query($siapin_query);
+      
+      //eksekusi perubahan data( function ada di helper.php)
+      doChangesData();
+      
       header("location:sukses.php");
     }
 ?>
