@@ -8,6 +8,16 @@ if( hasChange() === '1' ) {
   $msg = "<div class='alert alert-warning'>Ada data baru telah masuk. Tekan \"Generate Jadwal\" untuk acak ulang jadwal.</div>"; 
 }
 
+if( isset( $_GET['e'] ) && $_GET['e'] == 'n'  ) {
+  $msg = "<div class='alert alert-success'>Acak jadwal telah selesai dilakukan.</div>"; 
+}
+
+$query = "SELECT * FROM tb_jadwal LEFT JOIN tb_matakuliah ON tb_jadwal.id_mk = tb_matakuliah.id_mk
+                                  JOIN tb_dosen ON tb_jadwal.id_dosen = tb_dosen.id_dosen
+                                  JOIN tb_kelas ON tb_jadwal.id_kelas = tb_kelas.id_kelas
+                                  ORDER BY hari ASC";
+$doQuery = mysql_query( $query );
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,10 +99,20 @@ if( hasChange() === '1' ) {
                         <th>Mata Kuliah</th>
                         <th>SKS</th>
                         <th>Dosen</th>
+                        <th>Ruang</th>
                       </tr>
                     </thead>
                     <tbody>
-                      
+                      <?php while( $r = mysql_fetch_array( $doQuery ) ): ?>
+                        <tr>
+                          <td><?php echo kodeHari( $r['hari'] ); ?></td>
+                          <td><?php echo $r['pukul']; ?></td>
+                          <td><?php echo $r['nama_mk']; ?></td>
+                          <td><?php echo $r['sks']; ?></td>
+                          <td><?php echo $r['nama_dosen']; ?></td>
+                          <td><?php echo $r['kelas']; ?></td>
+                        </tr>
+                      <?php endwhile; ?>
                     </tbody>
                   </table>
                 </section>
