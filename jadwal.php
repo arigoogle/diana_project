@@ -9,7 +9,11 @@ if( hasChange() === '1' ) {
 }
 
 if( isset( $_GET['e'] ) && $_GET['e'] == 'n'  ) {
-  $msg = "<div class='alert alert-success'>Acak jadwal telah selesai dilakukan.</div>"; 
+  
+  $msg = "<div class='alert alert-success'><a class=\"close\">×</a> Acak jadwal telah selesai dilakukan.</div>"; 
+} elseif( isset( $_GET['e'] ) && $_GET['e'] == 'manual-sukses' ) {
+  
+  $msg = "<div class='alert alert-success'><a class=\"close\">×</a> Penambahan jadwal berhasil dilakukan.</div>"; 
 }
 
 $query = "SELECT * FROM tb_jadwal LEFT JOIN tb_matakuliah ON tb_jadwal.id_mk = tb_matakuliah.id_mk
@@ -19,6 +23,7 @@ $query = "SELECT * FROM tb_jadwal LEFT JOIN tb_matakuliah ON tb_jadwal.id_mk = t
 $doQuery = mysql_query( $query );
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
