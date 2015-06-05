@@ -58,9 +58,9 @@ function generateJadwal( $day = null )
 
       $totalJam = $perSks * $sks;
       
-      $startTime = date("h.i", strtotime( $startJam ) );
+      $startTime = date("H.i", strtotime( $startJam ) );
       $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $startJam ));
-      $endTime = date("h.i", $endTimeRaw);
+      $endTime = date("H.i", $endTimeRaw);
       $time = $startTime . " - " . $endTime; 
 
       $id_kelas = dataKelas();
