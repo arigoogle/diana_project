@@ -10,10 +10,13 @@ if( hasChange() === '1' ) {
 
 if( isset( $_GET['e'] ) && $_GET['e'] == 'n'  ) {
   
-  $msg = "<div class='alert alert-success'><a class=\"close\">×</a> Acak jadwal telah selesai dilakukan.</div>"; 
+  $msg = "<div class='alert alert-success'>Acak jadwal telah selesai dilakukan.</div>"; 
 } elseif( isset( $_GET['e'] ) && $_GET['e'] == 'manual-sukses' ) {
   
-  $msg = "<div class='alert alert-success'><a class=\"close\">×</a> Penambahan jadwal berhasil dilakukan.</div>"; 
+  $msg = "<div class='alert alert-success'>Penambahan jadwal berhasil dilakukan.</div>"; 
+} elseif( isset( $_GET['e'] ) && $_GET['e'] == 'edit-sukses' ) {
+  
+  $msg = "<div class='alert alert-success'>Jadwal berhasil diubah.</div>"; 
 }
 
 $query = "SELECT * FROM tb_jadwal LEFT JOIN tb_matakuliah ON tb_jadwal.id_mk = tb_matakuliah.id_mk
@@ -76,7 +79,7 @@ $doQuery = mysql_query( $query );
                           <td><?php echo $r['sks']; ?></td>
                           <td><?php echo $r['nama_dosen']; ?></td>
                           <td><?php echo $r['kelas']; ?></td>
-                          <td><a href="#" class="btn btn-small btn-info">Ubah</a></td>
+                          <td><a href="tambah_jadwal_manual.php?id=<?php echo $r['id_jadwal'] ?>" class="btn btn-small btn-info">Ubah</a></td>
                         </tr>
                       <?php endwhile; ?>
                     </tbody>
