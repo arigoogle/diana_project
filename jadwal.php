@@ -80,7 +80,8 @@ $doQuery = mysql_query( $query );
                 <section id="stats">
                   <header>
                     <div class="pull-right">
-                        <a href="tambah_jadwal.php" class="btn btn-primary btn-small">Generate Jadwal</a>
+                        <a href="tambah_jadwal_manual.php" class="btn btn-small">Add Jadwal Manual</a>
+                        <a onclick="return confirm('Jadwal akan diacak ulang. Lanjutkan?')" href="tambah_jadwal.php" class="btn btn-primary btn-small">Generate Jadwal</a>
                     </div>
                     <h1>Jadwal</h1>
                   </header>
@@ -100,6 +101,7 @@ $doQuery = mysql_query( $query );
                         <th>SKS</th>
                         <th>Dosen</th>
                         <th>Ruang</th>
+                        <th>#</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -111,6 +113,7 @@ $doQuery = mysql_query( $query );
                           <td><?php echo $r['sks']; ?></td>
                           <td><?php echo $r['nama_dosen']; ?></td>
                           <td><?php echo $r['kelas']; ?></td>
+                          <td><a href="#" class="btn btn-small btn-info">Ubah</a></td>
                         </tr>
                       <?php endwhile; ?>
                     </tbody>
