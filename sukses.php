@@ -22,34 +22,6 @@
 
 <body>
 
-<!-- Navbar
-  ================================================== -->
-<div class="navbar navbar-static-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-
-      <a class="brand" href="#">INSPIRITAS</a>
-      
-
-      <div class="nav-collapse collapse" id="main-menu">
-        <div class="auth pull-right">
-            <img class="avatar" src="images/littke.png">
-            <span class="name">Diana</span><br/>
-            <span class="links">
-                <a href="#">Settings</a>
-                <a href="login.php">Logout</a>
-            </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="container">
     <div class="row-fluid">
         <div class="span3">
