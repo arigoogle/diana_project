@@ -141,7 +141,7 @@
     $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $startJam ));
     $endTime = date("H.i", $endTimeRaw);
     $time = $startTime . " - " . $endTime; 
-    $query = mysql_query("INSERT INTO tb_jadwal(id_mk, id_dosen, id_kelas, pukul, hari) VALUES('$mk', '$dosen', '$kelas', '$time', '$hari')");
+    $query = mysql_query("INSERT INTO tb_jadwal(id_mk, id_dosen, id_kelas, pukul, hari, is_auto_generate) VALUES('$mk', '$dosen', '$kelas', '$time', '$hari','0')");
 
     header('location:jadwal.php?e=manual-sukses');
   } elseif( isset( $_POST['tekan'] ) && ! empty( $_POST['id_jadwal'] ) ) {
