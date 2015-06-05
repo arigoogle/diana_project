@@ -47,7 +47,7 @@
                       <?php while ($a= mysql_fetch_array($do_query)) :  ?>
                         <tr>
                           <td class="primary"><?php echo $a['username']; ?></td>
-                          <td class="primary"><?php echo $a['password']; ?></td>
+                          <td class="primary"><?php echo '****'; ?></td>
                           <td>
                             <a class="btn btn-small" href="edit_user.php?id_user=<?php echo $a['id_user'] ?>">Edit</a>
                             <a class="btn btn-small btn-danger" href="delete_user.php?id_user=<?php echo $a['id_user'] ?>">Delete</a>

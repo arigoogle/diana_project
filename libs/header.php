@@ -1,4 +1,5 @@
-<!DOCTYPE htmlu>
+<?php session_start(); ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -35,7 +36,7 @@
             <span class="name">Diana</span><br/>
             <span class="links">
                 <a href="#">Settings</a>
-                <a href="login.php">Logout</a>
+                <a href="index.php?p=logout">Logout</a>
             </span>
         </div>
       </div>

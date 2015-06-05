@@ -4,7 +4,7 @@
     if (isset($_POST['tekan'])) 
     {
       $username     = $_POST['username'];
-      $password     = $_POST['password'];
+      $password     = md5( $_POST['password'] );
       $siapin_query = "INSERT INTO tb_user (username,password) VALUES ('$username','$password')";
       $do_query     = mysql_query($siapin_query);
       header("location:user.php");

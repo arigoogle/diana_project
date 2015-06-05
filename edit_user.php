@@ -17,7 +17,7 @@
     {
       
       $id_user        = $a['id_user'];
-      $password       = $a['password'];
+      $password       = md5( $a['password'] );
       $username       = $a['username'];
 
     }
@@ -25,7 +25,7 @@
   if (isset($_POST['tekan'])) 
     {
       $username      = $_POST['username'];
-      $password      = $_POST['password'];
+      $password      = md5( $_POST['password'] );
       $siapin_query = "UPDATE tb_user SET username='$username' , password='$password' WHERE id_user=$id_user";
       $do_query     = mysql_query($siapin_query);
 
