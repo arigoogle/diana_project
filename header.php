@@ -37,10 +37,9 @@ if( empty( $_SESSION['username'] ) || empty( $_SESSION['password'] ) || ! isset(
 
       <div class="nav-collapse collapse" id="main-menu">
         <div class="auth pull-right">
-            <img class="avatar" src="images/littke.png">
-            <span class="name">Diana</span><br/>
+            <img class="avatar" width="40" src="images/littke.png">
+            <span class="name"><?php echo $_SESSION['username'] ?></span><br/>
             <span class="links">
-                <a href="#">Settings</a>
                 <a href="index.php?p=logout">Logout</a>
             </span>
         </div>
