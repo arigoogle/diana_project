@@ -15,7 +15,7 @@ if( isset( $_POST['ok'] ) ) {
 	$username = $_POST['username'];
 	$pass = md5( $_POST['pass'] );
 	$qUser = mysql_query("SELECT * FROM tb_user WHERE username='$username' AND password='$pass'");
-	if( $qUser ) {
+	if( mysql_num_rows( $qUser ) > 0 ) {
 
 		session_start();
 		$r = mysql_fetch_array( $qUser );
