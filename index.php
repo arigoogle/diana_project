@@ -1,3 +1,37 @@
+<?php
+include 'libs/konek.php';
+
+$msg = null;
+if( isset( $_GET['p'] ) && $_GET['p'] == 'logout' ) {
+
+	session_start();
+	unset( $_SESSION );
+	session_destroy();
+	$msg = '<div class="alert alert-success">Logout Sukses.</div>';
+}
+
+if( isset( $_POST['ok'] ) ) {
+
+	$username = $_POST['username'];
+	$pass = md5( $_POST['pass'] );
+	$qUser = mysql_query("SELECT * FROM tb_user WHERE username='$username' AND password='$pass'");
+	if( $qUser ) {
+
+		session_start();
+		$r = mysql_fetch_array( $qUser );
+		$msg = '<div class="alert alert-success">Login Berhasil.</div>';
+		$_SESSION['username'] = $r['username'];
+		$_SESSION['password'] = $r['password'];
+
+		header('location:dashboard.php');
+	} else {
+
+		$msg = '<div class="alert alert-danger">Login gagal.</div>';
+	}
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,32 +68,21 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="dashboard.php">
-		        <h2 class="form-login-heading">sign in now</h2>
+		      <form class="form-login" action="#" method="POST">
+		        <h2 class="form-login-heading">E-SCHEDULE LOGIN</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" placeholder="User ID" autofocus>
+		        	<?php echo $msg ?>
+		            <input type="text" name="username" class="form-control" placeholder="User ID" autofocus>
 		            <br>
-		            <input type="password" class="form-control" placeholder="Password">
+		            <input type="password" name="pass" class="form-control" placeholder="Password">
 		            <label class="checkbox">
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
-		
+		                    <!-- <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a> -->
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block" href="admin.php" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
-		            <hr>
+		            <button class="btn btn-theme btn-block" name="ok" type="submit"><i class="fa fa-lock"></i> SIGN IN</button>
 		            
 		            <div class="login-social-link centered">
-		            <p>or you can sign in via your social network</p>
-		                <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
-		                <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
-		            </div>
-		            <div class="registration">
-		                Don't have an account yet?<br/>
-		                <a class="" href="#">
-		                    Create an account
-		                </a>
-		            </div>
 		
 		        </div>
 		
@@ -78,7 +101,7 @@
 		                      </div>
 		                      <div class="modal-footer">
 		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-		                          <button class="btn btn-theme" type="button">Submit</button>
+		                          <button class="btn btn-theme" name="ok" type="submit">Login</button>
 		                      </div>
 		                  </div>
 		              </div>
