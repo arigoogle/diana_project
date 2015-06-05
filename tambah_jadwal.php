@@ -20,56 +20,61 @@ function generateJadwal( $day = null )
     $jmlDosen = mysql_num_rows( mysql_query("SELECT * FROM tb_dosen") );
     
     $counterDosen = 0;
-    //kosongkan table tb_jadwal
-    mysql_query('TRUNCATE TABLE tb_jadwal');
+    //kosongkan table tb_jadwal yang digenerate otomatis
+    $delete = mysql_query("DELETE FROM tb_jadwal WHERE is_auto_generate='1'");
 
-    while( $r = mysql_fetch_array( $qMatakuliah ) ) {
+    if( $delete ) {
 
-      if( $counterDosen >= $jmlDosen ) {
-        $counterDosen = 0;
+      while( $r = mysql_fetch_array( $qMatakuliah ) ) {
+
+        if( $counterDosen >= $jmlDosen ) {
+          $counterDosen = 0;
+        }
+
+        if( $day == null ) {
+         
+          $number = range( 0, 4 );
+          shuffle( $number );
+          $selectedDay = $number[0]; 
+        }
+
+        if( $selectedDay === 4 ) {
+
+          $numberJam = range(0, 2);
+          shuffle( $numberJam );
+          $startJam = $perkuliahanRegulerJumat[ $numberJam[0] ];
+        } else {
+
+          $numberJam = range(0, 3);
+          shuffle( $numberJam );
+          $startJam = $perkuliahanReguler[ $numberJam[0] ];
+        }
+
+
+
+        //data matakuliah
+        $id_matakuliah = $r['id_mk'];
+        $nama_matakuliah = $r['nama_mk'];
+        $sks = $r['sks'];
+        $perSks = 50;
+
+        $totalJam = $perSks * $sks;
+        
+        $startTime = date("H.i", strtotime( $startJam ) );
+        $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $startJam ));
+        $endTime = date("H.i", $endTimeRaw);
+        $time = $startTime . " - " . $endTime; 
+
+        $id_kelas = dataKelas();
+        $id_dosen = dataDosen( $counterDosen );
+        
+        // echo "Matakuliah $nama_matakuliah akan berada dikelas $id_kelas dengan dosen $id_dosen di hari $selectedDay dimulai pukul $startJam - $endTime<br>\n";
+        
+        $query = mysql_query("INSERT INTO tb_jadwal(id_mk, id_dosen, id_kelas, pukul, hari, is_auto_generate) VALUES('$id_matakuliah', '$id_dosen', '$id_kelas', '$time', '$selectedDay', '1')");
+        $counterDosen++;
+
+        // echo "matakuliah $nama_matakuliah berhasil dimasukkan <br>";
       }
-
-      if( $day == null ) {
-       
-        $number = range( 0, 4 );
-        shuffle( $number );
-        $selectedDay = $number[0]; 
-      }
-
-      if( $selectedDay === 4 ) {
-
-        $numberJam = range(0, 2);
-        shuffle( $numberJam );
-        $startJam = $perkuliahanRegulerJumat[ $numberJam ];
-      } else {
-
-        $numberJam = range(0, 3);
-        shuffle( $numberJam );
-        $startJam = $perkuliahanReguler[ $numberJam[0] ];
-      }
-
-
-
-      //data matakuliah
-      $id_matakuliah = $r['id_mk'];
-      $nama_matakuliah = $r['nama_mk'];
-      $sks = $r['sks'];
-      $perSks = 50;
-
-      $totalJam = $perSks * $sks;
-      
-      $startTime = date("H.i", strtotime( $startJam ) );
-      $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $startJam ));
-      $endTime = date("H.i", $endTimeRaw);
-      $time = $startTime . " - " . $endTime; 
-
-      $id_kelas = dataKelas();
-      $id_dosen = dataDosen( $counterDosen );
-      
-      // echo "Matakuliah $nama_matakuliah akan berada dikelas $id_kelas dengan dosen $id_dosen di hari $selectedDay dimulai pukul $startJam - $endTime<br>\n";
-      
-      $query = mysql_query("INSERT INTO tb_jadwal(id_mk, id_dosen, id_kelas, pukul, hari) VALUES('$id_matakuliah', '$id_dosen', '$id_kelas', '$time', '$selectedDay')");
-      $counterDosen++;
     }
 
     doChangesData('0');
