@@ -8,6 +8,9 @@ if( isset( $_GET['p'] ) && $_GET['p'] == 'logout' ) {
 	unset( $_SESSION );
 	session_destroy();
 	$msg = '<div class="alert alert-success">Logout Sukses.</div>';
+} elseif( isset( $_GET['p'] ) && $_GET['p'] == 'no-login' ) {
+
+	$msg = '<div class="alert alert-danger">Anda harus login terlebih dahulu.</div>';
 }
 
 if( isset( $_POST['ok'] ) ) {

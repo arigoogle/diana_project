@@ -1,4 +1,9 @@
 <?php session_start(); ?>
+
+<?php 
+if( empty( $_SESSION['username'] ) || empty( $_SESSION['password'] ) || ! isset( $_SESSION['username'] ) || ! isset( $_SESSION['password'] ) )
+  header('location:index.php?p=no-login');
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
