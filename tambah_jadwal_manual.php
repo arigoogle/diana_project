@@ -34,6 +34,23 @@
   $mk     = null;
   $dosen  = null;
   $kelas  = null;
+
+  $id = null;
+  //jika halaman yang direquest merupakan edit jadwal;
+  if( isset( $_GET['id'] ) ) {
+    $id = $_GET['id'];
+    $q = mysql_query("SELECT * FROM tb_jadwal WHERE id_jadwal='$id'");
+    $r = mysql_fetch_array( $q );
+    $jamArray = explode('-', $r['pukul']);
+    $startCurrentTime = $jamArray[0];
+    $hari   = $r['hari'];
+    $pukul  = str_replace('.', ':', $startCurrentTime);
+    $mk     = $r['id_mk'];
+    $dosen  = $r['id_dosen'];
+    $kelas  = (string)$r['id_kelas'];
+  }
+
+
   //get all data from field
   if( isset( $_POST['periksajadwal'] ) || isset( $_POST['tekan'] ) ) {
     $hari   = $_POST['hari'];
@@ -113,7 +130,7 @@
   }
 
   //input jadwal
-  if( isset( $_POST['tekan'] ) ) {
+  if( isset( $_POST['tekan'] ) && empty( $_POST['id_jadwal'] ) ) {
     
     //cari sks
     $qSks = mysql_fetch_array( mysql_query( "SELECT sks FROM tb_matakuliah WHERE id_mk='$mk'" ) );
@@ -127,6 +144,28 @@
     $query = mysql_query("INSERT INTO tb_jadwal(id_mk, id_dosen, id_kelas, pukul, hari) VALUES('$mk', '$dosen', '$kelas', '$time', '$hari')");
 
     header('location:jadwal.php?e=manual-sukses');
+  } elseif( isset( $_POST['tekan'] ) && ! empty( $_POST['id_jadwal'] ) ) {
+
+    $id = $_POST['id_jadwal'];
+
+    //cari sks
+    $qSks = mysql_fetch_array( mysql_query( "SELECT sks FROM tb_matakuliah WHERE id_mk='$mk'" ) );
+    $sks = $qSks['sks'];
+    $totalJam = 50 * $sks;
+
+    $startTime = date("H.i", strtotime( $pukul ) );
+    $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $startJam ));
+    $endTime = date("H.i", $endTimeRaw);
+    $time = $startTime . " - " . $endTime; 
+    $query = mysql_query("UPDATE tb_jadwal SET hari='$hari',
+                                                id_mk='$mk',  
+                                                id_dosen='$dosen',
+                                                id_kelas='$kelas',
+                                                pukul='$time'
+                                          WHERE id_jadwal='$id'");
+
+    header('location:jadwal.php?e=edit-sukses');
+
   }
 
 
@@ -161,6 +200,7 @@
                 <!-- Forms
                 ================================================== -->
                 <section id="forms">
+                  <?php if( count( $resultPeriksa ) > 0 ): ?>
                   <div class="sub-header">
                     <h2>Hasil periksa jadwal</h2>
                   </div>
@@ -172,18 +212,6 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <!-- <tr>
-                        <td>Kelas dan Jam Perkuliahan</td>
-                        <td><span class="label label-success">Kelas dan jam perkuliahan bisa dipakai</span></td>
-                      </tr>
-                      <tr>
-                        <td>Status Dosen</td>
-                        <td><span class="label label-warning">Dosen yang disebutkan telah mengisi matakuliah anu, ini, dan ono</span></td>
-                      </tr>
-                      <tr>
-                        <td>Status Matakuliah</td>
-                        <td><span class="label label-warning">Mata Kuliah tersebut sudah diampu oleh dosen anu pada hari anu pukul anu di kelas anu</span></td>
-                      </tr>     -->
                       <?php for( $i=0; $i < count( $resultPeriksa ); $i++ ): ?>
                       <tr>
                         <td><?php echo $resultPeriksa[ $i ]['detail'] ?></td>
@@ -192,6 +220,7 @@
                       <?php endfor; ?>                  
                     </tbody>
                   </table>
+                  <?php endif; ?>
 
                   <div class="sub-header">
                     <h2>Form</h2>
@@ -203,6 +232,7 @@
                           <div class="control-group">
                               <label class="control-label" for="hari">Hari</label>
                               <div class="controls">
+                                <input type="hidden" name="id_jadwal" value="<?php echo $id ?>">
                                 <select name="hari" id="hari" class="input-small">
                                   <?php foreach( $arrayHari as $key => $value ) : ?>
                                       
@@ -274,7 +304,7 @@
                                   <?php while( $r = mysql_fetch_array( $dataKelas ) ) : ?>
                                     
                                     <?php if( $r['id_kelas'] === $kelas ) : ?>
-                                        <option value="<?php echo $r['id_kelas']; ?>"><?php echo $r['kelas']; ?></option>
+                                        <option value="<?php echo $r['id_kelas']; ?>" selected="selected"><?php echo $r['kelas']; ?></option>
                                       <?php else: ?>
                                         <option value="<?php echo $r['id_kelas']; ?>"><?php echo $r['kelas']; ?></option>
                                       <?php endif; ?>
