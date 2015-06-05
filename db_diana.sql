@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 03 Jun 2015 pada 14.04
+-- Generation Time: 05 Jun 2015 pada 22.19
 -- Versi Server: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -58,8 +58,9 @@ CREATE TABLE IF NOT EXISTS `tb_jadwal` (
   `id_dosen` int(11) NOT NULL,
   `id_kelas` int(11) NOT NULL,
   `pukul` varchar(30) NOT NULL,
-  `hari` varchar(15) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `hari` varchar(15) NOT NULL,
+  `is_auto_generate` tinyint(1) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=372 DEFAULT CHARSET=latin1;
 
 --
 -- Truncate table before insert `tb_jadwal`
@@ -70,15 +71,16 @@ TRUNCATE TABLE `tb_jadwal`;
 -- Dumping data untuk tabel `tb_jadwal`
 --
 
-INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mk`, `id_dosen`, `id_kelas`, `pukul`, `hari`) VALUES
-(1, 1, 1, 1, '11.00 - 12.40', '3'),
-(2, 2, 2, 0, '10.00 - 11.40', '1'),
-(3, 3, 3, 1, '08.00 - 10.30', '2'),
-(4, 4, 4, 2, '11.00 - 01.30', '3'),
-(5, 5, 1, 0, '10.00 - 12.30', '0'),
-(6, 6, 2, 0, '08.00 - 09.40', '0'),
-(7, 7, 3, 2, '08.00 - 10.30', '0'),
-(8, 8, 4, 3, '10.00 - 12.30', '1');
+INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mk`, `id_dosen`, `id_kelas`, `pukul`, `hari`, `is_auto_generate`) VALUES
+(371, 8, 4, 2, '14.00 - 16.30', '2', 1),
+(35, 8, 2, 1, '14.00 - 03.30', '4', 0),
+(370, 7, 3, 1, '10.00 - 12.30', '0', 1),
+(369, 6, 2, 0, '14.00 - 15.40', '1', 1),
+(368, 5, 1, 3, '10.00 - 12.30', '3', 1),
+(367, 4, 4, 2, '11.00 - 13.30', '2', 1),
+(366, 3, 3, 1, '13.00 - 15.30', '4', 1),
+(365, 2, 2, 3, '08.00 - 09.40', '3', 1),
+(364, 1, 1, 2, '13.00 - 14.40', '4', 1);
 
 -- --------------------------------------------------------
 
@@ -132,7 +134,7 @@ INSERT INTO `tb_matakuliah` (`id_mk`, `nama_mk`, `sks`) VALUES
 (2, 'Kewarganegaraan', 2),
 (3, 'Algortima dan Struktur Data', 3),
 (4, 'Interaksi Manusia dan Komputer', 3),
-(5, 'Enterprise dan Resource Planni', 3),
+(5, 'Enterprise dan Resource Planning', 3),
 (6, 'Etika Bernegara', 2),
 (7, 'Perancangan Basis Data', 3),
 (8, 'Sistem Operasi', 3);
@@ -183,7 +185,7 @@ TRUNCATE TABLE `tb_user`;
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`) VALUES
-(1, 'root', 'smanuthamrin');
+(1, 'masvio', '202cb962ac59075b964b07152d234b70');
 
 --
 -- Indexes for dumped tables
@@ -238,7 +240,7 @@ MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `tb_jadwal`
 --
 ALTER TABLE `tb_jadwal`
-MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=372;
 --
 -- AUTO_INCREMENT for table `tb_kelas`
 --
