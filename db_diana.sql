@@ -2,8 +2,8 @@
 -- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: 05 Jun 2015 pada 22.19
+-- Host: 127.0.0.1
+-- Generation Time: 15 Jun 2015 pada 14.35
 -- Versi Server: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -32,11 +32,6 @@ CREATE TABLE IF NOT EXISTS `tb_dosen` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `tb_dosen`
---
-
-TRUNCATE TABLE `tb_dosen`;
---
 -- Dumping data untuk tabel `tb_dosen`
 --
 
@@ -62,11 +57,6 @@ CREATE TABLE IF NOT EXISTS `tb_jadwal` (
   `is_auto_generate` tinyint(1) NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=372 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `tb_jadwal`
---
-
-TRUNCATE TABLE `tb_jadwal`;
 --
 -- Dumping data untuk tabel `tb_jadwal`
 --
@@ -94,11 +84,6 @@ CREATE TABLE IF NOT EXISTS `tb_kelas` (
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `tb_kelas`
---
-
-TRUNCATE TABLE `tb_kelas`;
---
 -- Dumping data untuk tabel `tb_kelas`
 --
 
@@ -120,11 +105,6 @@ CREATE TABLE IF NOT EXISTS `tb_matakuliah` (
   `sks` int(11) NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `tb_matakuliah`
---
-
-TRUNCATE TABLE `tb_matakuliah`;
 --
 -- Dumping data untuk tabel `tb_matakuliah`
 --
@@ -152,11 +132,6 @@ CREATE TABLE IF NOT EXISTS `tb_option` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Truncate table before insert `tb_option`
---
-
-TRUNCATE TABLE `tb_option`;
---
 -- Dumping data untuk tabel `tb_option`
 --
 
@@ -173,19 +148,15 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
 `id_user` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(32) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
---
--- Truncate table before insert `tb_user`
---
-
-TRUNCATE TABLE `tb_user`;
 --
 -- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`) VALUES
-(1, 'masvio', '202cb962ac59075b964b07152d234b70');
+(1, 'masvio', '202cb962ac59075b964b07152d234b70'),
+(2, 'ari', '202cb962ac59075b964b07152d234b70');
 
 --
 -- Indexes for dumped tables
@@ -260,7 +231,7 @@ MODIFY `id_option` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
