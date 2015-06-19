@@ -57,6 +57,23 @@
                               <input type="text" class="input-large" id="input01" name="nama_dosen">
                             </div>
                           </div>
+                          <div class="control-group">
+                            <label class="control-label" for="input01">Dapat Mengajar</label>
+                            <div class="controls">
+                            <?php
+
+                              $    = "SELECT * FROM tb_matakuliah";
+                              $do_query = mysql_query($query);
+
+                            ?>
+                                <select name="id_mk">
+                                  <option value="Kalkulus">Kalkulus</option>
+                                  <option value="Pemrogaman">Pemrogaman</option>
+                                  <option value="IMK">IMK</option>
+                                  <option value="Sistem Operasi">Sistem Operasi</option>
+                                </select>
+                            </div>
+                          </div>
                       <div class="form-actions">
                         <button type="submit" class="btn btn-primary" name="tekan">Save changes</button>
                         <button type="reset" class="btn">Cancel</button>
