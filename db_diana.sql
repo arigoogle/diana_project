@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 15 Jun 2015 pada 14.35
+-- Generation Time: 19 Jun 2015 pada 20.50
 -- Versi Server: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -23,13 +23,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_ampu_dosen`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_ampu_dosen` (
+`id_ampu` int(11) NOT NULL,
+  `id_mk` text NOT NULL,
+  `id_dosen` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_ampu_dosen`
+--
+
+INSERT INTO `tb_ampu_dosen` (`id_ampu`, `id_mk`, `id_dosen`) VALUES
+(1, '6', 6),
+(3, '["5","6"]', 8);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_dosen`
 --
 
 CREATE TABLE IF NOT EXISTS `tb_dosen` (
 `id_dosen` int(11) NOT NULL,
   `nama_dosen` varchar(80) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_dosen`
@@ -39,7 +59,9 @@ INSERT INTO `tb_dosen` (`id_dosen`, `nama_dosen`) VALUES
 (1, 'Sumardi Karta Dinata As'),
 (2, 'Leornado lamborgini'),
 (3, 'Bagus Sadirja'),
-(4, 'Sumarni Sembalo');
+(4, 'Sumarni Sembalo'),
+(6, 'Vive Vio Permana'),
+(8, 'Jhon Avenger');
 
 -- --------------------------------------------------------
 
@@ -136,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `tb_option` (
 --
 
 INSERT INTO `tb_option` (`id_option`, `option_key`, `option_value`) VALUES
-(1, 'changes_data', '0');
+(1, 'changes_data', '1');
 
 -- --------------------------------------------------------
 
@@ -161,6 +183,12 @@ INSERT INTO `tb_user` (`id_user`, `username`, `password`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tb_ampu_dosen`
+--
+ALTER TABLE `tb_ampu_dosen`
+ ADD PRIMARY KEY (`id_ampu`);
 
 --
 -- Indexes for table `tb_dosen`
@@ -203,10 +231,15 @@ ALTER TABLE `tb_user`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_ampu_dosen`
+--
+ALTER TABLE `tb_ampu_dosen`
+MODIFY `id_ampu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `tb_dosen`
 --
 ALTER TABLE `tb_dosen`
-MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tb_jadwal`
 --
