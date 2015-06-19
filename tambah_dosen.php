@@ -1,6 +1,7 @@
 <?php  
   require_once 'libs/konek.php';
   require_once 'libs/helper.php';
+
   //matakuliah
   $dataMk  = mysql_query( "SELECT * FROM tb_matakuliah ORDER BY nama_mk ASC" );
   
@@ -8,6 +9,16 @@
     {
       $nama_dosen   = $_POST['nama_dosen'];
       $siapin_query = "INSERT INTO tb_dosen (nama_dosen) VALUES ('$nama_dosen')";
+      $do_query     = mysql_query($siapin_query);
+
+      // memasukkan data ampu dosen
+      $id_mk = json_encode( $_POST['id_mk'] ); // convert dari array php ke array json
+      
+      //cari di dosen
+      $q_dosen = mysql_fetch_array( mysql_query("SELECT id_dosen FROM tb_dosen WHERE nama_dosen='$nama_dosen'") );
+      $id_dosen = $q_dosen['id_dosen'];
+
+      $siapin_query = "INSERT INTO tb_ampu_dosen (id_dosen, id_mk) VALUES ('$id_dosen', '$id_mk') ";
       $do_query     = mysql_query($siapin_query);
       
       //eksekusi perubahan data( function ada di helper.php)
@@ -62,7 +73,7 @@
                           <div class="control-group">
                               <label class="control-label" for="input03">Mata Kuliah</label>
                               <div class="controls">
-                                <select name="mk" id="input03" class="input-xlarge">
+                                <select name="id_mk[]" id="input03" class="input-xlarge" multiple>
                                   <?php while( $r = mysql_fetch_array( $dataMk ) ) : ?>
                                     
                                     <?php if( $r['id_mk'] === $mk ) : ?>
