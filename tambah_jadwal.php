@@ -50,8 +50,6 @@ function generateJadwal( $day = null )
           $startJam = $perkuliahanReguler[ $numberJam[0] ];
         }
 
-
-
         //data matakuliah
         $id_matakuliah = $r['id_mk'];
         $nama_matakuliah = $r['nama_mk'];
