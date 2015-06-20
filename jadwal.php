@@ -19,7 +19,7 @@ if( isset( $_GET['e'] ) && $_GET['e'] == 'n'  ) {
   $msg = "<div class='alert alert-success'>Jadwal berhasil diubah.</div>"; 
 }
 
-$query = "SELECT * FROM tb_jadwal LEFT JOIN tb_matakuliah ON tb_jadwal.id_mk = tb_matakuliah.id_mk
+$query = "SELECT * FROM tb_jadwal JOIN tb_matakuliah ON tb_jadwal.id_mk = tb_matakuliah.id_mk
                                   JOIN tb_dosen ON tb_jadwal.id_dosen = tb_dosen.id_dosen
                                   JOIN tb_kelas ON tb_jadwal.id_kelas = tb_kelas.id_kelas
                                   ORDER BY hari ASC";
