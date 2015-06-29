@@ -138,11 +138,10 @@
     $totalJam = 50 * $sks;
 
     $startTime = date("H.i", strtotime( $pukul ) );
-    $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $startJam ));
+    $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $pukul ));
     $endTime = date("H.i", $endTimeRaw);
     $time = $startTime . " - " . $endTime; 
     $query = mysql_query("INSERT INTO tb_jadwal(id_mk, id_dosen, id_kelas, pukul, hari, is_auto_generate) VALUES('$mk', '$dosen', '$kelas', '$time', '$hari','0')");
-
     header('location:jadwal.php?e=manual-sukses');
   } elseif( isset( $_POST['tekan'] ) && ! empty( $_POST['id_jadwal'] ) ) {
 
@@ -154,7 +153,7 @@
     $totalJam = 50 * $sks;
 
     $startTime = date("H.i", strtotime( $pukul ) );
-    $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $startJam ));
+    $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $pukul ));
     $endTime = date("H.i", $endTimeRaw);
     $time = $startTime . " - " . $endTime; 
     $query = mysql_query("UPDATE tb_jadwal SET hari='$hari',
