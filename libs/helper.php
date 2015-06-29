@@ -22,31 +22,51 @@ function doChangesData( $value='1' )
 	return $query;
 }
 
-function dataKelas()
+function dataKelas( $return = 'id_kelas' )
 {
 	
 	$query = mysql_query( "SELECT * FROM tb_kelas");
-	$return = array();
+	$kelas = array();
 	while( $r=mysql_fetch_array( $query ) ) {
 
-		$return[] = $r['id_kelas'];
+		$kelas[] = $r['id_kelas'];
 	}
 
-	$return = array_rand( $return );
-	return $return;
+	if( $return == 'id_kelas' ) {
+
+		$max = count( $kelas ) - 1;
+		$output = range(0, $max);
+		shuffle( $output );
+		return $kelas[ $output[0] ];
+	} else {
+
+		return count( $kelas );	
+	}
 }
 
-function dataDosen( $index = null )
+function dataDosen( $index = null, $id_mk, $return = 'id_dosen' )
 {
 	
-	$query = mysql_query( "SELECT * FROM tb_dosen");
-	$return = array();
-	while( $r=mysql_fetch_array( $query ) ) {
+	//cari dosen yang bisa mengajar mk bersangkutan
+	$ampu = mysql_query( "SELECT * FROM tb_ampu_dosen WHERE id_mk LIKE '%\"$id_mk\"%'" );
+	if( $ampu ) {
+		// echo "SELECT * FROM tb_ampu_dosen WHERE id_mk LIKE '%\"$id_mk%\"'";
+		$dosen = array();
+		while ( $r = mysql_fetch_array( $ampu ) ) {
+			$dosen[] = $r['id_dosen'];
+		}
 
-		$return[] = $r['id_dosen'];
+		if( $return == 'id_dosen' ) {
+			if( isset( $dosen[ $index ] ) )
+				return $dosen[ $index ];
+			else
+				return $out =array_rand( $dosen );
+		} else {
+			return count( $dosen );
+		}
 	}
 
-	return $return[ $index ];
+	return 0;
 }
 
 function kodeHari( $kode )
