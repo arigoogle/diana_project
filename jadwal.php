@@ -19,9 +19,9 @@ if( isset( $_GET['e'] ) && $_GET['e'] == 'n'  ) {
   $msg = "<div class='alert alert-success'>Jadwal berhasil diubah.</div>"; 
 }
 
-$query = "SELECT * FROM tb_jadwal JOIN tb_matakuliah ON tb_jadwal.id_mk = tb_matakuliah.id_mk
-                                  JOIN tb_dosen ON tb_jadwal.id_dosen = tb_dosen.id_dosen
-                                  JOIN tb_kelas ON tb_jadwal.id_kelas = tb_kelas.id_kelas
+$query = "SELECT * FROM tb_jadwal left JOIN tb_matakuliah ON tb_jadwal.id_mk = tb_matakuliah.id_mk
+                                  left JOIN tb_dosen ON tb_jadwal.id_dosen = tb_dosen.id_dosen
+                                  left JOIN tb_kelas ON tb_jadwal.id_kelas = tb_kelas.id_kelas
                                   ORDER BY hari ASC";
 $doQuery = mysql_query( $query );
 
@@ -77,7 +77,7 @@ $doQuery = mysql_query( $query );
                           <td><?php echo $r['pukul']; ?></td>
                           <td><?php echo $r['nama_mk']; ?></td>
                           <td><?php echo $r['sks']; ?></td>
-                          <td><?php echo $r['nama_dosen']; ?></td>
+                          <td><?php echo ( ! empty( $r['nama_dosen'] ) ? $r['nama_dosen'] : '<span class="label label-danger">Dosen belum ada</span>' ); ?></td>
                           <td><?php echo $r['kelas']; ?></td>
                           <td><a href="tambah_jadwal_manual.php?id=<?php echo $r['id_jadwal'] ?>" class="btn btn-small btn-info">Ubah</a></td>
                         </tr>
@@ -91,5 +91,4 @@ $doQuery = mysql_query( $query );
         </div>
     </div>
 </div><!-- /container -->
-
 <?php include 'footer.php' ?>
