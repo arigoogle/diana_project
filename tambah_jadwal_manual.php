@@ -1,6 +1,15 @@
 <?php  
   require_once 'libs/konek.php';
   
+  if( isset($_GET['a']) && $_GET['a'] == 'delete' ) {
+
+    $id = (int)$_GET['id'];
+    mysql_query("DELETE FROM tb_jadwal WHERE id_jadwal='$id'");
+    // echo mysql_error();
+    header('location:jadwal.php?e=d-sukses');
+    exit();
+  }
+
   //array hari
   $arrayHari = array(
         0 => "Senin",
