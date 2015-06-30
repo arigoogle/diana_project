@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Melakukan pemeriksaan apakah telah terjadi perubahan data atau tidak.
  * @return string  1 = jika terjadi perubahan data | 0 = tidak terjadi perubahan data
@@ -74,6 +75,15 @@ function kodeHari( $kode )
     
     $arrayDay = array("Senin", "Selasa", "Rabu", "Kamis", "Jumat");
 	return $arrayDay[ $kode ];
+}
+
+function humanizeJam( $startTime, $endTime )
+{
+	$startTime = date("H.i", $startTime);
+	$endTime = date("H.i", $endTime);
+
+	$return = $startTime .' - ' . $endTime;
+	return $return;
 }
 
 ?>

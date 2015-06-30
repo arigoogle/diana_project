@@ -68,19 +68,18 @@ if( $delete ) {
       $startJam = $perkuliahanReguler[ $numberJam[0] ];
     }
     
-    $startTime = date("H.i", strtotime( $startJam ) );
-    $endTimeRaw = strtotime("+$totalJam minutes", strtotime( $startJam ));
-    $endTime = date("H.i", $endTimeRaw);
-    $time = $startTime . " - " . $endTime; 
+    $startTimeRaw = strtotime( $startJam );
+    $endTimeRaw = strtotime("+$totalJam minutes", $startTimeRaw);
 
     $id_kelas = dataKelas();
     $id_dosen = dataDosen( $counterDosen, $id_matakuliah, 'id_dosen' );
     // echo "Matakuliah $nama_matakuliah berdurasi $totalJam menit akan berada dikelas $id_kelas dengan dosen $id_dosen di hari $selectedDay dimulai pukul $startTime - $endTime<br>\n";
+    $_SESSION['totalJam'] = $totalJam;
     $_SESSION['id_kelas'] = $id_kelas;
     $_SESSION['hari'] = $selectedDay;
     $_SESSION['jumlah_kelas'] = dataKelas('jumlah_kelas');
     // echo $id_kelas . '<<<br>';
-    createJadwal( $id_matakuliah, $id_dosen, $id_kelas, $time, $selectedDay );
+    createJadwal( $id_matakuliah, $id_dosen, $id_kelas, $startTimeRaw, $endTimeRaw, $selectedDay );
     $counterDosen++;
   }
 }
@@ -88,15 +87,13 @@ if( $delete ) {
 /**
  * Untuk mencari jadwal yang kosong dan memasukkannya ke database. Fungsi ini mengandung fungso rekursif
  */
-function createJadwal( $id_mk, $id_dosen, $id_kelas, $pukul, $hari )
+function createJadwal( $id_mk, $id_dosen, $id_kelas, $jam_awal, $jam_akhir, $hari )
 {
 
-  $pukulRaw = explode('-', $pukul);
-  $startTime = $pukulRaw[0];
-  if( checkKelasJam( $hari, $id_kelas, $startTime ) ) {
+  if( checkKelasJam( $hari, $id_dosen, $id_kelas, $jam_awal, $jam_akhir ) ) {
 
     // echo "Matakuliah $id_mk dengan dosen $id_dosen di kelas $id_kelas pukul $pukul pada hari $hari telah berhasil dimasukkan <br>";
-    $query = mysql_query("INSERT INTO tb_jadwal(id_mk, id_dosen, id_kelas, pukul, hari, is_auto_generate) VALUES('$id_mk', '$id_dosen', '$id_kelas', '$pukul', '$hari', '1')");
+    $query = mysql_query("INSERT INTO tb_jadwal(id_mk, id_dosen, id_kelas, jam_awal, jam_akhir, hari, is_auto_generate) VALUES('$id_mk', '$id_dosen', '$id_kelas', '$jam_awal', '$jam_akhir', '$hari', '1')");
   } else {
 
     $id_kelas = (int)$id_kelas + 1;
@@ -106,19 +103,28 @@ function createJadwal( $id_mk, $id_dosen, $id_kelas, $pukul, $hari )
       if( $hari < 4 ) {
 
         $hari += 1;
-        if( (int)$hari !== (int)$_SESSION['hari'] )
-          createJadwal( $id_mk, $id_dosen, $_SESSION['id_kelas'], $pukul, $hari );
-        else
+        if( (int)$hari !== (int)$_SESSION['hari'] ) {
+
+          $batasJumat = strtotime( "2015-06-06 11:30:00" );
+          if( $hari === 4 && $jam_akhir > $batasJumat ) {
+
+            $jam_awal = strtotime("2015-06-06 13:00:00");
+            $lamaPerkuliahan = $_SESSION['totalJam'];
+            $jam_akhir = strtotime("+lamaPerkuliahan minutes", $jam_awal);
+          }
+          createJadwal( $id_mk, $id_dosen, $_SESSION['id_kelas'], $jam_awal, $jam_akhir, $hari );
+        } else {
           return false;
+        }
 
       } else {
         
         $hari = 0;
-        createJadwal( $id_mk, $id_dosen, $_SESSION['id_kelas'], $pukul, $hari );
+        createJadwal( $id_mk, $id_dosen, $_SESSION['id_kelas'], $jam_awal, $jam_akhir, $hari );
       }
     } else {
 
-      createJadwal( $id_mk, $id_dosen, $id_kelas, $pukul, $hari );
+      createJadwal( $id_mk, $id_dosen, $id_kelas, $jam_awal, $jam_akhir, $hari );
     }
   }
 }
@@ -128,15 +134,26 @@ function createJadwal( $id_mk, $id_dosen, $id_kelas, $pukul, $hari )
  * @return boolean  true => Jika jadwal bersangkutan bisa dipakai
  *                  false => Jadwal bersangkutan tidak bisa dipakai
  */
-function checkKelasJam( $hari, $id_kelas, $startTime=null, $fullTime=null )
+function checkKelasJam( $hari, $id_dosen, $id_kelas, $startTime=null, $endTime=null )
 {
 
     $return = array();
-    $cek1 = mysql_num_rows( mysql_query("SELECT * FROM tb_jadwal WHERE pukul LIKE '%$startTime%' AND hari='$hari' AND id_kelas='$id_kelas'") );
-    if( $cek1 > 0 )
-      return false;
+    $cek1 = mysql_num_rows( mysql_query("SELECT * FROM tb_jadwal WHERE hari='$hari' AND id_kelas='$id_kelas' AND jam_awal<='$endTime'") );
+    if( $cek1 === 0 )
+      $return[] = 'true';
+    else
+      $return[] = 'false';
 
-    return true;
+    $cek2 = mysql_num_rows( mysql_query("SELECT * FROM tb_jadwal WHERE hari='$hari' AND id_dosen='$id_dosen' AND jam_awal<='$endTime'") );
+    if( $cek2 > 0 )
+      $return[] = 'false';
+    else
+      $return[] = 'true';
+
+    if( in_array('false', $return) )
+      return false;
+    else
+      return true;
 }
 
 /**

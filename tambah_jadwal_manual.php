@@ -67,6 +67,13 @@
     $mk     = $_POST['mk'];
     $dosen  = $_POST['dosen'];
     $kelas  = $_POST['kelas'];
+
+    //cari data matakuliah
+    $cariMk = mysql_fetch_array( mysql_query( "SELECT sks FROM tb_matakuliah WHERE id_mk='$mk'" ) );
+    $jumlahSks = $cariMk['sks'];
+    $lamaPerkuliahan = $jumlahSks * 50;
+    $startTimeRaw = strtotime( $pukul );
+    $endTimeRaw = strtotime("+$lamaPerkuliahan minutes", $startTimeRaw);
   }
 
   //periksa jadwal
@@ -75,7 +82,7 @@
 
     //cek kelas dan jam
     $newPukul = str_replace(':', '.', $pukul);
-    $qKelasJam = mysql_query( "SELECT * FROM tb_jadwal WHERE pukul LIKE '%$newPukul%' AND id_kelas='$kelas' AND hari='$hari'" );
+    $qKelasJam = mysql_query( "SELECT * FROM tb_jadwal WHERE id_kelas='$kelas' AND hari='$hari' AND jam_awal<='$endTimeRaw'" );
     $cekKelasJam = (bool)mysql_num_rows( $qKelasJam );
     if( ! $cekKelasJam ) {
       $resultPeriksa[] = array(
@@ -86,6 +93,22 @@
       $resultPeriksa[] = array(
             'detail' => 'Kelas dan Jam Perkuliahan',
             'note' => '<span class="label label-danger">Kelas dan jam perkuliahan tidak bisa dipakai</span>',
+        );
+
+    }
+
+    //cek apakah dosen sudah mengajar pada jam yang ditentukan
+    $qJamDosen = mysql_query( "SELECT * FROM tb_jadwal WHERE hari='$hari' AND id_dosen='$dosen' AND jam_awal<='$endTimeRaw'" );
+    $cekJamDosen = (bool)mysql_num_rows( $qJamDosen );
+    if( ! $cekJamDosen ) {
+      $resultPeriksa[] = array(
+            'detail' => 'Jadwal Dosen',
+            'note' => '<span class="label label-success">Dosen bisa mengajar pada jam yang ditentukan.</span>',
+        );
+    } else {
+      $resultPeriksa[] = array(
+            'detail' => 'Jadwal Dosen',
+            'note' => '<span class="label label-danger">Dosen tidak bisa mengajar pada jam yang ditentukan.</span>',
         );
 
     }

@@ -25,7 +25,7 @@ if( isset( $_GET['e'] ) && $_GET['e'] == 'n'  ) {
 $query = "SELECT * FROM tb_jadwal left JOIN tb_matakuliah ON tb_jadwal.id_mk = tb_matakuliah.id_mk
                                   left JOIN tb_dosen ON tb_jadwal.id_dosen = tb_dosen.id_dosen
                                   left JOIN tb_kelas ON tb_jadwal.id_kelas = tb_kelas.id_kelas
-                                  ORDER BY hari ASC";
+                                  ORDER BY hari,jam_awal ASC";
 $doQuery = mysql_query( $query );
 
 ?>
@@ -96,7 +96,7 @@ $doQuery = mysql_query( $query );
                           <td><?php echo $no; ?></td>
                           <td><?php echo $mode; ?></td>
                           <td><?php echo kodeHari( $r['hari'] ); ?></td>
-                          <td><?php echo $r['pukul']; ?></td>
+                          <td><?php echo humanizeJam( $r['jam_awal'], $r['jam_akhir'] ); ?></td>
                           <td><?php echo $r['nama_mk']; ?></td>
                           <td><?php echo $r['sks']; ?></td>
                           <td><?php echo ( ! empty( $r['nama_dosen'] ) ? $r['nama_dosen'] : '<span class="label label-danger">Dosen belum ada</span>' ); ?></td>
