@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 30 Jun 2015 pada 04.01
+-- Generation Time: 30 Jun 2015 pada 04.02
 -- Versi Server: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -88,8 +88,7 @@ CREATE TABLE IF NOT EXISTS `tb_jadwal` (
   `jam_awal` varchar(20) NOT NULL,
   `jam_akhir` varchar(20) NOT NULL,
   `hari` varchar(15) NOT NULL,
-  `is_auto_generate` tinyint(1) NOT NULL,
-  `s` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `is_auto_generate` tinyint(1) NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=275 DEFAULT CHARSET=latin1;
 
 --
@@ -101,14 +100,14 @@ TRUNCATE TABLE `tb_jadwal`;
 -- Dumping data untuk tabel `tb_jadwal`
 --
 
-INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mk`, `id_dosen`, `id_kelas`, `jam_awal`, `jam_akhir`, `hari`, `is_auto_generate`, `s`) VALUES
-(274, 8, 7, 3, '1433592000', '1433601000', '0', 1, '2015-06-30 01:48:58'),
-(273, 7, 5, 2, '1433592000', '1433601000', '1', 1, '2015-06-30 01:48:58'),
-(272, 11, 7, 5, '1433592000', '1433601000', '3', 1, '2015-06-30 01:48:58'),
-(271, 10, 4, 2, '1433570400', '1433579400', '0', 1, '2015-06-30 01:48:58'),
-(270, 4, 4, 5, '1433592000', '1433601000', '2', 1, '2015-06-30 01:48:58'),
-(269, 3, 4, 2, '1433574000', '1433583000', '4', 1, '2015-06-30 01:48:58'),
-(268, 9, 5, 6, '1433577600', '1433586600', '0', 1, '2015-06-30 01:48:58');
+INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mk`, `id_dosen`, `id_kelas`, `jam_awal`, `jam_akhir`, `hari`, `is_auto_generate`) VALUES
+(274, 8, 7, 3, '1433592000', '1433601000', '0', 1),
+(273, 7, 5, 2, '1433592000', '1433601000', '1', 1),
+(272, 11, 7, 5, '1433592000', '1433601000', '3', 1),
+(271, 10, 4, 2, '1433570400', '1433579400', '0', 1),
+(270, 4, 4, 5, '1433592000', '1433601000', '2', 1),
+(269, 3, 4, 2, '1433574000', '1433583000', '4', 1),
+(268, 9, 5, 6, '1433577600', '1433586600', '0', 1);
 
 -- --------------------------------------------------------
 
