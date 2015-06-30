@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 29 Jun 2015 pada 09.49
--- Versi Server: 5.6.16
--- PHP Version: 5.5.11
+-- Host: localhost
+-- Generation Time: 30 Jun 2015 pada 04.01
+-- Versi Server: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,26 +26,26 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `tb_ampu_dosen`
 --
 
+DROP TABLE IF EXISTS `tb_ampu_dosen`;
 CREATE TABLE IF NOT EXISTS `tb_ampu_dosen` (
-  `id_ampu` int(11) NOT NULL AUTO_INCREMENT,
+`id_ampu` int(11) NOT NULL,
   `id_mk` text NOT NULL,
-  `id_dosen` int(11) NOT NULL,
-  PRIMARY KEY (`id_ampu`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `id_dosen` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `tb_ampu_dosen`
+--
+
+TRUNCATE TABLE `tb_ampu_dosen`;
 --
 -- Dumping data untuk tabel `tb_ampu_dosen`
 --
 
 INSERT INTO `tb_ampu_dosen` (`id_ampu`, `id_mk`, `id_dosen`) VALUES
-(1, '["3"]', 1),
-(2, '["5","6","4"]', 2),
-(3, '["7","8","1"]', 3),
 (4, '["3","4","10"]', 4),
 (5, '["7","9","8"]', 5),
-(6, 'null', 6),
-(7, '["11","8"]', 7),
-(8, '["7"]', 8);
+(7, '["11","8"]', 7);
 
 -- --------------------------------------------------------
 
@@ -53,12 +53,17 @@ INSERT INTO `tb_ampu_dosen` (`id_ampu`, `id_mk`, `id_dosen`) VALUES
 -- Struktur dari tabel `tb_dosen`
 --
 
+DROP TABLE IF EXISTS `tb_dosen`;
 CREATE TABLE IF NOT EXISTS `tb_dosen` (
-  `id_dosen` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_dosen` varchar(80) NOT NULL,
-  PRIMARY KEY (`id_dosen`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+`id_dosen` int(11) NOT NULL,
+  `nama_dosen` varchar(80) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `tb_dosen`
+--
+
+TRUNCATE TABLE `tb_dosen`;
 --
 -- Dumping data untuk tabel `tb_dosen`
 --
@@ -74,32 +79,36 @@ INSERT INTO `tb_dosen` (`id_dosen`, `nama_dosen`) VALUES
 -- Struktur dari tabel `tb_jadwal`
 --
 
+DROP TABLE IF EXISTS `tb_jadwal`;
 CREATE TABLE IF NOT EXISTS `tb_jadwal` (
-  `id_jadwal` int(11) NOT NULL AUTO_INCREMENT,
+`id_jadwal` int(11) NOT NULL,
   `id_mk` int(11) NOT NULL,
   `id_dosen` int(11) NOT NULL,
   `id_kelas` int(11) NOT NULL,
-  `pukul` varchar(30) NOT NULL,
+  `jam_awal` varchar(20) NOT NULL,
+  `jam_akhir` varchar(20) NOT NULL,
   `hari` varchar(15) NOT NULL,
   `is_auto_generate` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_jadwal`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1159 ;
+  `s` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=MyISAM AUTO_INCREMENT=275 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `tb_jadwal`
+--
+
+TRUNCATE TABLE `tb_jadwal`;
 --
 -- Dumping data untuk tabel `tb_jadwal`
 --
 
-INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mk`, `id_dosen`, `id_kelas`, `pukul`, `hari`, `is_auto_generate`) VALUES
-(1115, 7, 5, 3, '09.00 - 03.30', '0', 0),
-(35, 8, 2, 2, '08.00 - 10.30', '4', 0),
-(1157, 8, 7, 3, '10.00 - 12.30', '2', 1),
-(1156, 7, 7, 1, '11.00 - 13.30', '2', 1),
-(1155, 11, 7, 5, '13.00 - 15.30', '4', 1),
-(1154, 10, 7, 1, '10.00 - 12.30', '3', 1),
-(1153, 4, 7, 3, '13.00 - 15.30', '4', 1),
-(1152, 10, 4, 3, '10.00 - 03.30', '2', 1),
-(1151, 9, 7, 0, '13.00 - 15.30', '4', 1),
-(1158, 3, 4, 1, '08.00 - 03.30', '0', 0);
+INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mk`, `id_dosen`, `id_kelas`, `jam_awal`, `jam_akhir`, `hari`, `is_auto_generate`, `s`) VALUES
+(274, 8, 7, 3, '1433592000', '1433601000', '0', 1, '2015-06-30 01:48:58'),
+(273, 7, 5, 2, '1433592000', '1433601000', '1', 1, '2015-06-30 01:48:58'),
+(272, 11, 7, 5, '1433592000', '1433601000', '3', 1, '2015-06-30 01:48:58'),
+(271, 10, 4, 2, '1433570400', '1433579400', '0', 1, '2015-06-30 01:48:58'),
+(270, 4, 4, 5, '1433592000', '1433601000', '2', 1, '2015-06-30 01:48:58'),
+(269, 3, 4, 2, '1433574000', '1433583000', '4', 1, '2015-06-30 01:48:58'),
+(268, 9, 5, 6, '1433577600', '1433586600', '0', 1, '2015-06-30 01:48:58');
 
 -- --------------------------------------------------------
 
@@ -107,12 +116,17 @@ INSERT INTO `tb_jadwal` (`id_jadwal`, `id_mk`, `id_dosen`, `id_kelas`, `pukul`, 
 -- Struktur dari tabel `tb_kelas`
 --
 
+DROP TABLE IF EXISTS `tb_kelas`;
 CREATE TABLE IF NOT EXISTS `tb_kelas` (
-  `id_kelas` int(11) NOT NULL AUTO_INCREMENT,
-  `kelas` varchar(30) NOT NULL,
-  PRIMARY KEY (`id_kelas`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+`id_kelas` int(11) NOT NULL,
+  `kelas` varchar(30) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `tb_kelas`
+--
+
+TRUNCATE TABLE `tb_kelas`;
 --
 -- Dumping data untuk tabel `tb_kelas`
 --
@@ -131,13 +145,18 @@ INSERT INTO `tb_kelas` (`id_kelas`, `kelas`) VALUES
 -- Struktur dari tabel `tb_matakuliah`
 --
 
+DROP TABLE IF EXISTS `tb_matakuliah`;
 CREATE TABLE IF NOT EXISTS `tb_matakuliah` (
-  `id_mk` int(11) NOT NULL AUTO_INCREMENT,
+`id_mk` int(11) NOT NULL,
   `nama_mk` varchar(50) NOT NULL,
-  `sks` int(11) NOT NULL,
-  PRIMARY KEY (`id_mk`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `sks` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `tb_matakuliah`
+--
+
+TRUNCATE TABLE `tb_matakuliah`;
 --
 -- Dumping data untuk tabel `tb_matakuliah`
 --
@@ -157,14 +176,18 @@ INSERT INTO `tb_matakuliah` (`id_mk`, `nama_mk`, `sks`) VALUES
 -- Struktur dari tabel `tb_option`
 --
 
+DROP TABLE IF EXISTS `tb_option`;
 CREATE TABLE IF NOT EXISTS `tb_option` (
-  `id_option` int(11) NOT NULL AUTO_INCREMENT,
+`id_option` int(11) NOT NULL,
   `option_key` varchar(140) NOT NULL,
-  `option_value` text NOT NULL,
-  PRIMARY KEY (`id_option`),
-  UNIQUE KEY `option_key` (`option_key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `option_value` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `tb_option`
+--
+
+TRUNCATE TABLE `tb_option`;
 --
 -- Dumping data untuk tabel `tb_option`
 --
@@ -178,13 +201,18 @@ INSERT INTO `tb_option` (`id_option`, `option_key`, `option_value`) VALUES
 -- Struktur dari tabel `tb_user`
 --
 
+DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE IF NOT EXISTS `tb_user` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+`id_user` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `password` varchar(32) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+--
+-- Truncate table before insert `tb_user`
+--
+
+TRUNCATE TABLE `tb_user`;
 --
 -- Dumping data untuk tabel `tb_user`
 --
@@ -193,6 +221,91 @@ INSERT INTO `tb_user` (`id_user`, `username`, `password`) VALUES
 (1, 'masvio', '202cb962ac59075b964b07152d234b70'),
 (2, 'UPJ', '202cb962ac59075b964b07152d234b70');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tb_ampu_dosen`
+--
+ALTER TABLE `tb_ampu_dosen`
+ ADD PRIMARY KEY (`id_ampu`);
+
+--
+-- Indexes for table `tb_dosen`
+--
+ALTER TABLE `tb_dosen`
+ ADD PRIMARY KEY (`id_dosen`);
+
+--
+-- Indexes for table `tb_jadwal`
+--
+ALTER TABLE `tb_jadwal`
+ ADD PRIMARY KEY (`id_jadwal`);
+
+--
+-- Indexes for table `tb_kelas`
+--
+ALTER TABLE `tb_kelas`
+ ADD PRIMARY KEY (`id_kelas`);
+
+--
+-- Indexes for table `tb_matakuliah`
+--
+ALTER TABLE `tb_matakuliah`
+ ADD PRIMARY KEY (`id_mk`);
+
+--
+-- Indexes for table `tb_option`
+--
+ALTER TABLE `tb_option`
+ ADD PRIMARY KEY (`id_option`), ADD UNIQUE KEY `option_key` (`option_key`);
+
+--
+-- Indexes for table `tb_user`
+--
+ALTER TABLE `tb_user`
+ ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tb_ampu_dosen`
+--
+ALTER TABLE `tb_ampu_dosen`
+MODIFY `id_ampu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `tb_dosen`
+--
+ALTER TABLE `tb_dosen`
+MODIFY `id_dosen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `tb_jadwal`
+--
+ALTER TABLE `tb_jadwal`
+MODIFY `id_jadwal` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=275;
+--
+-- AUTO_INCREMENT for table `tb_kelas`
+--
+ALTER TABLE `tb_kelas`
+MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `tb_matakuliah`
+--
+ALTER TABLE `tb_matakuliah`
+MODIFY `id_mk` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `tb_option`
+--
+ALTER TABLE `tb_option`
+MODIFY `id_option` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `tb_user`
+--
+ALTER TABLE `tb_user`
+MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
